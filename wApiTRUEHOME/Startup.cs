@@ -38,8 +38,13 @@ namespace wApiTRUEHOME
             services.AddSingleton(ConnectionString); /// se Utiliza AddSingleton - Se crea una sola intancia en toda la aplicacion y se reutiliza-
 
 
-            services.AddScoped<IActivity, DataActivity>();     /// Se usa AddTransient -se crean cada vez que se utilizan- por que es un servicio liviano .
-            services.AddScoped<IB_L_Activity, Bl_Activity>();
+            services.AddTransient<IActivity, DataActivity>();     /// Se usa AddTransient -se crean cada vez que se utilizan- por que es un servicio liviano .
+            services.AddTransient<IActivityBussiness, ActivityData>();
+
+            services.AddTransient<IProperty, DataProperty>();
+            services.AddTransient<IPropertyBussiness, PropertyData>();
+
+
 
             services.AddSwaggerGen(c =>
                      {

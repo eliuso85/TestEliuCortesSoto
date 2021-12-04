@@ -12,9 +12,10 @@ namespace DataAccess
 
         Task<Activity> Update(Activity pActivity, int ACTIVITY_ID);
 
-        Task<List<Activity>> Get();//int? ACTIVITY_ID = null
+        Task<List<Activity>> Get();
+
+        Task<List<Activity>> GetValidDates(int idProperty, DateTime pSchedule);
 
         Task<string> Delete(int ACTIVITY_ID);
-
     }
 }
