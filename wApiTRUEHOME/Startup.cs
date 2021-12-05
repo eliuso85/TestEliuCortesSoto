@@ -37,7 +37,7 @@ namespace wApiTRUEHOME
             var ConnectionString = new PostgresSQLConfiguration(Configuration.GetConnectionString("PostgreSqlConnection"));
             services.AddSingleton(ConnectionString); /// se Utiliza AddSingleton - Se crea una sola intancia en toda la aplicacion y se reutiliza-
 
-
+            services.AddResponseCaching();
             services.AddTransient<IActivity, DataActivity>();     /// Se usa AddTransient -se crean cada vez que se utilizan- por que es un servicio liviano .
             services.AddTransient<IActivityBussiness, ActivityData>();
 
@@ -66,7 +66,7 @@ namespace wApiTRUEHOME
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseResponseCaching();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -24,10 +24,11 @@ namespace wApiTRUEHOME.Controllers
 
         [Route("api/Activity")]
         [HttpGet]
-        public async Task<ActionResult> Get(Filters filters)
+        [ResponseCache(Duration = 10)]
+        public async Task<List<Activity>> Get(Filters filters)
         {
             var result = await activityService.get(filters.dateIni, filters.dateFin, filters.status);
-            return Ok(result);
+            return result;
         }
 
 
