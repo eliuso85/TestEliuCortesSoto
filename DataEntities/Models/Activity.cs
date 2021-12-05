@@ -11,5 +11,9 @@ namespace DataEntities
         public DateTime created_at { get; set; }
         public DateTime update_at { get; set; }
         public string status { get; set; }
+        public virtual  string  Condition { get; set; }
+         public virtual  string titleProp { get; set; }
+        public virtual  string address { get; set; }
+
     }
 }

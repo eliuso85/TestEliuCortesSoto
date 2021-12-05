@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataEntities;
 using BussinesLogic;
+using DataEntities.Models.Filters;
 
 namespace wApiTRUEHOME.Controllers
 {
@@ -23,9 +24,10 @@ namespace wApiTRUEHOME.Controllers
 
         [Route("api/Activity")]
         [HttpGet]
-        public async Task<List<Activity>> Get()
+        public async Task<ActionResult> Get(Filters filters)
         {
-            return await activityService.get();
+            var result = await activityService.get(filters.dateIni, filters.dateFin, filters.status);
+            return Ok(result);
         }
 
 
@@ -66,6 +68,24 @@ namespace wApiTRUEHOME.Controllers
                 return NotFound(result);
             }
 
+        }
+
+        [Route("api/Activity")]
+        [HttpPut]
+        public async Task<ActionResult> Put([FromBody] Activity pActivity)
+        {
+            var isCancel = await activityService.GetValidStatus(pActivity.id_activity, "cancel");
+            var result = "";
+            if (isCancel == null)
+            {
+                result = (await activityService.update(pActivity)).ToString();
+                return Ok();
+            }
+            else
+            {
+                result = "La actividad ya esta cancelada";
+                return NotFound(result);
+            }
         }
     }
 }

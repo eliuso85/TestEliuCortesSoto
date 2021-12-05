@@ -9,13 +9,11 @@ namespace DataAccess
     public interface IActivity
     {
         Task<int> Save(Activity act);
-
-        Task<Activity> Update(Activity pActivity, int ACTIVITY_ID);
-
-        Task<List<Activity>> Get();
-
+        Task<int> Update(Activity pActivity);
+        Task<List<Activity>> Get(string dateIni, string dateFin, string status);
         Task<List<Activity>> GetValidDates(int idProperty, DateTime pSchedule);
-
         Task<string> Delete(int ACTIVITY_ID);
+        Task<Activity> GetValidStatus(int pActivity, string Status);
+
     }
 }
